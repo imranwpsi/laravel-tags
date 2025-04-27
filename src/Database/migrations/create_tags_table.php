@@ -12,7 +12,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('type')->default('default'); // Can be 'course', 'blog', etc.
+            $table->string('type');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
