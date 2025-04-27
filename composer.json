@@ -22,6 +22,7 @@
     "autoload": {
         "psr-4": {
             "Ihossain\\LaravelTags\\": "src/",
+            "Ihossain\\LaravelTags\\Helper\\": "src/Helper",
             "Ihossain\\LaravelTags\\Tests\\": "tests/"
         }
     },
