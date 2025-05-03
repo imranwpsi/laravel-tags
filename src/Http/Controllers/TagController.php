@@ -7,6 +7,7 @@ use Ihossain\LaravelTags\Helper\Helpers;
 use Ihossain\LaravelTags\Http\Requests\Tag\TagStoreRequest;
 use Ihossain\LaravelTags\Http\Requests\Tag\TagUpdateRequest;
 use Ihossain\LaravelTags\Models\Tag;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -31,14 +32,13 @@ class TagController extends Controller
         return Inertia::render('Tag/Index', [
             'moduleName' => $moduleName,
             'tags' => fn () => $query->paginate($request->get('per_page', 25))->withQueryString(),
-            'filters' => $filters,
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(TagStoreRequest $request)
+    public function store(TagStoreRequest $request): RedirectResponse
     {
         return back()->with([
             'success'   => 'Tag created successfully.',
@@ -49,7 +49,7 @@ class TagController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(TagUpdateRequest $request, $id)
+    public function update(TagUpdateRequest $request, $id): RedirectResponse
     {
         return back()->with([
             'success'   => 'Tag updated successfully.',
@@ -60,8 +60,17 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
-        //
+        $tag = Tag::whereId($id)->delete();
+        if ($tag) {
+            return back()->with([
+                'success'   => 'Tag deleted successfully.',
+            ]);
+        } else {
+            return back()->with([
+                'error'   => 'Tag could not be deleted.',
+            ]);
+        }
     }
 }
