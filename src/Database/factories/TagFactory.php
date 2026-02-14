@@ -14,6 +14,15 @@ class TagFactory extends Factory
         return [
             'name' => $this->faker->word,
             'slug' => $this->faker->slug,
+            'description' => $this->faker->sentence,
+            'color' => $this->faker->randomElement([
+                'slate',
+                'blue',
+                'purple',
+                'green',
+                'amber',
+                'red',
+            ]),
             'type' => $this->faker->randomElement(['course', 'blog']),
         ];
     }

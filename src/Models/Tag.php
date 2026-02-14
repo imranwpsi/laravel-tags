@@ -17,7 +17,14 @@ class Tag extends Model
         return TagFactory::new();
     }
 
-    protected $fillable = ['name', 'slug', 'type', 'is_active'];
+    protected $fillable = [
+        'name',
+        'slug',
+        'description',
+        'color',
+        'type',
+        'is_active',
+    ];
 
     public function courses(): MorphToMany
     {

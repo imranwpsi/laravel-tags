@@ -2,7 +2,7 @@
 
 return [
     'models' => [
-        'course' => \App\Models\Course::class,
+        'course' => \Modules\Course\Models\Course::class,
         'blog' => \App\Models\Blog::class,
     ],
 

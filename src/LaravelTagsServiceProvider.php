@@ -23,6 +23,11 @@ class LaravelTagsServiceProvider extends ServiceProvider
 
     public function register()
     {
+        $this->mergeConfigFrom(
+            __DIR__.'/config/laravel-tags.php',
+            'laravel-tags'
+        );
+
         $this->app->bind(
             \Ihossain\LaravelTags\Contracts\TagServiceContract::class,
             \Ihossain\LaravelTags\Services\TagService::class
