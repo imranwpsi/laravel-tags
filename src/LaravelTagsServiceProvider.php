@@ -8,7 +8,7 @@ class LaravelTagsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__.'/Database/migrations');
+        // Migrations are managed by the app's tenant migration path.
 
         $this->publishes([
             __DIR__.'/config/laravel-tags.php' => config_path('laravel-tags.php'),
@@ -16,7 +16,7 @@ class LaravelTagsServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/Database/migrations' => database_path('migrations'),
+                __DIR__.'/Database/migrations' => database_path('tenant'),
             ], 'laravel-tags-migrations');
         }
     }
