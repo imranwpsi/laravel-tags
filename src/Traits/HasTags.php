@@ -14,7 +14,7 @@ trait HasTags
             'taggables',
             'taggable_id',
             'tag_id'
-        );
+        )->withPivot('type');
     }
 
     public function syncTags(array $tags, string $type = 'default')

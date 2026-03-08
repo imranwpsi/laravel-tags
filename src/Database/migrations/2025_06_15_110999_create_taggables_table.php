@@ -12,6 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('tag_id')->constrained()->cascadeOnDelete();
             $table->morphs('taggable');
+            $table->string('type')->default('default');
             $table->timestamps();
         });
     }
