@@ -31,7 +31,13 @@ trait HasTags
             ])->id;
         });
 
-        $this->tags()->wherePivot('type', $type)->sync($tagIds);
+        // Keep tag relations scoped by pivot type and always persist the type on attach.
+        $syncPayload = $tagIds
+            ->unique()
+            ->mapWithKeys(fn (int $id) => [$id => ['type' => $type]])
+            ->toArray();
+
+        $this->tags()->wherePivot('type', $type)->sync($syncPayload);
 
         return $this;
     }
